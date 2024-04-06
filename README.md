@@ -7,4 +7,4 @@ golang http response encapsulation base on gin
 - `func ErrorInternal(c *gin.Context) `: return code 2001
 - `func ErrorBadRequest(c *gin.Context)`: return code 2002
 - `func ErrorNotAuthorized(c *gin.Context)`:return code 2003
-- `func Error(c *gin.Context, code int, message string)`: code is no less than 2003
+- `func Error(c *gin.Context, code int, message string)`: ***code must be no less than 2003, otherwise it will panic***

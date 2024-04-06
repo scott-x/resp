@@ -43,7 +43,7 @@ func ErrorNotAuthorized(c *gin.Context) {
 
 func Error(c *gin.Context, code int, message string) {
 	minRequirement := int(mycode.ResponseCode(mycode.ERROR_NOT_AUTHORIZED))
-	if code < minRequirement {
+	if code <= minRequirement {
 		log.Panicf("invalid error of the return mycode, as promised it should be no less than %d", minRequirement)
 	}
 	c.JSON(http.StatusOK, gin.H{
