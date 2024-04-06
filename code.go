@@ -4,7 +4,7 @@ type ResponseCode int
 
 const (
 	SUCCESS ResponseCode = 2000 + iota
-	INTERNAL_ERROR
-	BAD_REQUEST
-	NotAuthorized
+	ERROR_INTERNAL
+	ERROR_BAD_REQUEST
+	ERROR_NOT_AUTHORIZED
 )
