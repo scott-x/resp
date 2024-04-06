@@ -2,6 +2,7 @@ package resp
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/scott-x/resp/mycode"
 	"log"
 	"net/http"
 )
@@ -9,7 +10,7 @@ import (
 // success
 func Success[T any](c *gin.Context, data T) {
 	c.JSON(http.StatusOK, gin.H{
-		"code": int(ResponseCode(SUCCESS)),
+		"code": int(mycode.ResponseCode(mycode.SUCCESS)),
 		"data": data,
 	})
 }
@@ -20,7 +21,7 @@ func SuccessMessage(c *gin.Context) {
 }
 
 // error
-func customError(c *gin.Context, code ResponseCode, message string) {
+func customError(c *gin.Context, code mycode.ResponseCode, message string) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": int(code),
 		"msg":  message,
@@ -29,20 +30,21 @@ func customError(c *gin.Context, code ResponseCode, message string) {
 
 // error instance
 func ErrorInternal(c *gin.Context) {
-	customError(c, ResponseCode(ERROR_INTERNAL), "internal error")
+	customError(c, mycode.ResponseCode(mycode.ERROR_INTERNAL), "internal error")
 }
 
 func ErrorBadRequest(c *gin.Context) {
-	customError(c, ResponseCode(ERROR_BAD_REQUEST), "bad request")
+	customError(c, mycode.ResponseCode(mycode.ERROR_BAD_REQUEST), "bad request")
 }
 
 func ErrorNotAuthorized(c *gin.Context) {
-	customError(c, ResponseCode(ERROR_NOT_AUTHORIZED), "not authorized")
+	customError(c, mycode.ResponseCode(mycode.ERROR_NOT_AUTHORIZED), "not authorized")
 }
 
 func Error(c *gin.Context, code int, message string) {
-	if code < int(ResponseCode(ERROR_NOT_AUTHORIZED)) {
-		log.Panicf("invalid error of the return code, as promised it should be no less than %d", int(ResponseCode(ERROR_NOT_AUTHORIZED)))
+	minRequirement := int(mycode.ResponseCode(mycode.ERROR_NOT_AUTHORIZED))
+	if code < minRequirement {
+		log.Panicf("invalid error of the return mycode, as promised it should be no less than %d", minRequirement)
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
