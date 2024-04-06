@@ -2,12 +2,14 @@
 golang http response encapsulation base on gin
 
 ### API
-- `func Success[T any](c *gin.Context, data T)`: success response and the return code is 2000
-- `func SuccessMessage(c *gin.Context)`: return success message
-- `func ErrorInternal(c *gin.Context) `: return code 2001
-- `func ErrorBadRequest(c *gin.Context)`: return code 2002
-- `func ErrorNotAuthorized(c *gin.Context)`:return code 2003
-- `func Error(c *gin.Context, code int, message string)`: ***code must be no less than 2004, otherwise it will panic***
+- `func Success[T any](c *gin.Context, data T)`
+- `func Error(c *gin.Context, code int, message string)`
+- `func ErrorBadRequest(c *gin.Context)`
+- `func ErrorNotAuthorized(c *gin.Context)`
+- `func ErrorForbidden(c *gin.Context)`
+- `func ErrorNotFound(c *gin.Context)`
+- `func ErrorServerInternal(c *gin.Context)`
+
 
 ### demo
 
@@ -39,7 +41,7 @@ func main() {
 	})
 
 	route.GET("/test4", func(c *gin.Context) {
-		resp.Error(c, 2004, "username, password does not match")
+		resp.Error(c, 2001, "username, password does not match")
 	})
 
 	route.GET("/test5", func(c *gin.Context) {
