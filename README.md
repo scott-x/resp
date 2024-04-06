@@ -25,26 +25,6 @@ func main() {
 	route := gin.Default()
 
 	route.GET("/test", func(c *gin.Context) {
-		resp.SuccessMessage(c)
-	})
-	
-	route.GET("/test1", func(c *gin.Context) {
-		resp.ErrorInternal(c)
-	})
-
-	route.GET("/test2", func(c *gin.Context) {
-		resp.ErrorBadRequest(c)
-	})
-
-	route.GET("/test3", func(c *gin.Context) {
-		resp.ErrorNotAuthorized(c)
-	})
-
-	route.GET("/test4", func(c *gin.Context) {
-		resp.Error(c, 2001, "username, password does not match")
-	})
-
-	route.GET("/test5", func(c *gin.Context) {
 		type Output struct {
 			Name string `json:"name"`
 			Age  int    `json:"age"`
@@ -56,10 +36,37 @@ func main() {
 		resp.Success(c, o)
 	})
 
-	route.GET("/test6", func(c *gin.Context) {
+	route.GET("/test1", func(c *gin.Context) {
 		resp.Success(c, "success")
 	})
 
-	route.Run(":8989")
+	route.GET("/test2", func(c *gin.Context) {
+		resp.ErrorBadRequest(c)
+	})
+
+	route.GET("/test3", func(c *gin.Context) {
+		resp.ErrorNotAuthorized(c)
+	})
+
+	route.GET("/test4", func(c *gin.Context) {
+		resp.ErrorForbidden(c)
+	})
+
+	route.GET("/test5", func(c *gin.Context) {
+		resp.ErrorNotFound(c)
+	})
+
+	route.GET("/test6", func(c *gin.Context) {
+		resp.ErrorServerInternal(c)
+	})
+
+	route.GET("/test7", func(c *gin.Context) {
+		resp.Error(c, 2004, "username, password does not match")
+	})
+
+	err := route.Run(":8989")
+	if err != nil {
+		return
+	}
 }
 ```
