@@ -18,35 +18,35 @@ func Success[T any](c *gin.Context, data T) {
 func ErrorBadRequest(c *gin.Context) {
 	c.JSON(http.StatusBadRequest, gin.H{
 		"code": 400,
-		"msg":  "bad request",
+		"data": "bad request",
 	})
 }
 
 func ErrorNotAuthorized(c *gin.Context) {
 	c.JSON(http.StatusUnauthorized, gin.H{
 		"code": 401,
-		"msg":  "not authorized",
+		"data": "not authorized",
 	})
 }
 
 func ErrorForbidden(c *gin.Context) {
 	c.JSON(http.StatusForbidden, gin.H{
 		"code": 403,
-		"msg":  "content forbidden",
+		"data": "content forbidden",
 	})
 }
 
 func ErrorNotFound(c *gin.Context) {
 	c.JSON(http.StatusNotFound, gin.H{
 		"code": 404,
-		"msg":  "not found",
+		"data": "not found",
 	})
 }
 
 func ErrorServerInternal(c *gin.Context) {
 	c.JSON(http.StatusInternalServerError, gin.H{
 		"code": 500,
-		"msg":  "internal error",
+		"data": "internal error",
 	})
 }
 
@@ -54,6 +54,6 @@ func ErrorServerInternal(c *gin.Context) {
 func Error(c *gin.Context, code int, message string) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
-		"msg":  message,
+		"data": message,
 	})
 }
