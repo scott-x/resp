@@ -51,9 +51,9 @@ func ErrorServerInternal(c *gin.Context) {
 }
 
 // custom error: suggest starting from 2000
-func Error(c *gin.Context, code int, message string) {
+func Error[T any](c *gin.Context, code int, data T) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": code,
-		"data": message,
+		"data": data,
 	})
 }

@@ -3,7 +3,7 @@ golang http response encapsulation base on gin
 
 ### API
 - `func Success[T any](c *gin.Context, data T)`
-- `func Error(c *gin.Context, code int, message string)`
+- `func Error[T any](c *gin.Context, code int, data T)`
 - `func ErrorBadRequest(c *gin.Context)`
 - `func ErrorNotAuthorized(c *gin.Context)`
 - `func ErrorForbidden(c *gin.Context)`
